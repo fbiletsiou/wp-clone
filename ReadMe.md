@@ -1,11 +1,12 @@
 # Whatsapp Clone Project
 https://youtu.be/YPSjNIJEdXU?t=4075 
 
-Simple overview of use/purpose.
+Practice Project following the [Esteban Codes Tutorial](https://www.youtube.com/watch?v=YPSjNIJEdXU)
 
 ## Description
 
-An in-depth paragraph about your project and overview of use.
+Building a clone of WhatsApp, with authentication and image uploads.<br>
+Using: react native, expo, firebase, react navigation.
 
 ## Getting Started
 
@@ -18,32 +19,63 @@ An in-depth paragraph about your project and overview of use.
 
 ### Installing
 
-* `cd C:\Users\<USER NAME>\Documents\wp-clone\`
-* `npm install`
-* `npm install --location=global expo-cli`
+* ```
+  cd C:\Users\<USER NAME>\Documents\wp-clone\
+  ```
+* ```
+  npm install --location=global expo-cli
+  ```
+* ```
+  npm install
+  ```
+
+### Android Studio
+
+* Install Android Studio
+* `More Actions-->Virtual Device Manager`
+* Create devices:
+    1. Nexus 5X API 30 - Android 11.0
+    2. Pixel 3a API 30 - Android 11.0
+* Run both devices
+
+### Firebase
+
+* Go to [https://console.firebase.google.com/](https://console.firebase.google.com/)
+* `+ Add project`
+* Project name: `wp-clone..` .
+* Disable Google Analytics for this project --> Create Project .
+* Create new file: `firebase.js` .
+* Click `Get started by adding Firebase to your app` --> `Web` --> App nickname `Rn- client` --> `Register app` .
+* Copy the produced code snippet and paste it in `firebase.js` .
+* Continue to console
+* `Build` --> `Authentication`
+    * Get Started
+    * Sign-in providers: Email/Password --> Enable --> Save
+* `Build` --> `Storage`
+    * Get Started
+    * Next --> Cloud Storage Location: `eur3 (europe-west)` --> Done
+* `Build` --> `Firestore Database`
+    * Create Database
+    * Next --> Cloud Storage Location: `eur3 (europe-west)` --> Enable
 
 ### Executing program
 
-* How to run the program
-* Step-by-step bullets
-```
-npm run start
-```
-
+* ```
+  cd C:\Users\<USER NAME>\Documents\wp-clone\
+  ```
+* ```
+  npm run start
+  ```
+* Open [Expo Developer Tools](http://localhost:19002/) --> `Run on Android device/emulator`
 
 ## Authors
 
-Contributors names and contact info
+* Author: Florina Biletsiou <br>
+[@fbiletsiou](https://twitter.com/fbiletsiou)
 
-ex. Dominique Pizzie  
-ex. [@DomPizzie](https://twitter.com/dompizzie)
-
+* Instructor: Esteban Torres <br>
+[@esteban_codes](https://twitter.com/esteban_codes)
 
 ## Acknowledgments
 
-Inspiration, code snippets, etc.
-* [awesome-readme](https://github.com/matiassingers/awesome-readme)
-* [PurpleBooth](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2)
-* [dbader](https://github.com/dbader/readme-template)
-* [zenorocha](https://gist.github.com/zenorocha/4526327)
-* [fvcproductions](https://gist.github.com/fvcproductions/1bfc2d4aecb01a834b46)
+* Followed tutorial:  [3stbn/wp-clone](https://github.com/3stbn/wp-clone)
