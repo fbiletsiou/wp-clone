@@ -4,10 +4,13 @@ import { View, Text } from "react-native";
 import GlobalContext from "../context/Context";
 import { auth, db } from "../firebase";
 import ContactsFloatingIcon from "../components/ContactsFloatingIcon";
+import ListItem from "../components/ListItem";
+import useContacts from "../hooks/useHooks";
 
 export default function Chats() {
     const { currentUser } = auth;
     const { rooms, setRooms } = useContext(GlobalContext);
+    const contacts = useContacts()
     const chatsQuery = query(
         collection(db, "rooms"),
         where("participantsArray", "array-contains", currentUser.email )
@@ -25,9 +28,27 @@ export default function Chats() {
         });
         return () => unsubscribe();
     }, []);
+
+    function getUserB(user, contacts) {
+        const userContact = contacts.find((c) => c.email === user.email);
+        if(userContact && userContact.contactName) {
+            return {... user, contactName: userContact.contactName};
+        }
+        return user;
+    }
+
     return(
         <View style={{flex: 1, padding:5, paddingRight:10}}>
-            <Text>Chats</Text>
+            {rooms.map((room) => (
+                <ListItem 
+                    type="chat" 
+                    desciption={room.lastMessage} 
+                    key={room.id} 
+                    room={room} 
+                    time={room.lastMessage.createdAt}
+                    user={getUserB(room.userB, contacts)}
+                />
+            ))}
             <ContactsFloatingIcon />
         </View>
     )

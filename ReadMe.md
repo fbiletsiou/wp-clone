@@ -1,6 +1,6 @@
 # Whatsapp Clone Project
 
-https://youtu.be/YPSjNIJEdXU?t=9046
+https://youtu.be/YPSjNIJEdXU?t=13541
 
 Practice Project following the [Esteban Codes Tutorial](https://www.youtube.com/watch?v=YPSjNIJEdXU)
 

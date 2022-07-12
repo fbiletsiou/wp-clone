@@ -4,7 +4,6 @@ import { Text, TouchableOpacity } from "react-native";
 import GlobalContext from "../context/Context";
 import { Grid, Row, Col } from "react-native-easy-grid"
 import Avatar from "./Avatar";
-import { clickProps } from "react-native-web/dist/cjs/modules/forwardedProps";
 
 export default function ListItem({type, desciption, user, style, time, room, image}) {
     const navigation = useNavigation();
