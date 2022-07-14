@@ -6,7 +6,7 @@ import React, { useCallback, useContext, useEffect, useState } from "react";
 import { View, Text, ImageBackground } from "react-native";
 import { auth, db } from "../firebase";
 import GlobalContext from "../context/Context";
-import { collection, doc, onSnapshot, setDoc } from "@firebase/firestore";
+import { addDoc, collection, doc, onSnapshot, setDoc, updateDoc } from "@firebase/firestore";
 import { GiftedChat } from "react-native-gifted-chat";
 
 const randomId = nanoid();
@@ -47,7 +47,7 @@ export default function Chat() {
                 }
                 const userBData = {
                     displayName: userB.contactName || userB.displayName || "", 
-                    email: currentUser.email
+                    email: userB.email
                 };
                 if(userB.photoURL) {
                     userBData.photoURL = userB.photoURL;
@@ -73,10 +73,10 @@ export default function Chat() {
                 .docChanges()
                 .filter(({ type }) => type === 'added')
                 .map(({doc}) => {
-                    const message = doc.data()
-                    return { ...message, createdAt: message.createdAt.toDate()}
-                });
-                appendMessages(messages);
+                    const message = doc.data();
+                    return { ...message, createdAt: message.createdAt.toDate() };
+                })
+                appendMessages(messagesFirestore);
         });
         return () => unsubscribe();
     }, []);
@@ -85,11 +85,20 @@ export default function Chat() {
         setMessages((previousMessages) => GiftedChat.append(previousMessages, messages)) 
     }, [messages])
 
+    async function onSend(messages = []) {
+        const writes = messages.map((m) => addDoc(roomMessagesRef, m));
+        const lastMessage = messages[messages.length -1];
+        writes.push(updateDoc(roomRef, {lastMessage}));
+        await Promise.all(writes);
+    }
+
     return(
         <ImageBackground resizeMode="cover" source={require("../assets/chatbg.png")} style={{flex: 1 }}>
             <GiftedChat 
+                onSend={onSend}
                 messages={messages} 
                 user={senderUser}
+                renderAvatar={null}
             />
         </ImageBackground>
     )

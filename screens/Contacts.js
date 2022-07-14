@@ -23,7 +23,7 @@ export default function Contacts() {
 }
 
 function ContactPreview({contact, image}) {
-    const {rooms} = useContext(GlobalContext);
+    const {unfilteredRooms} = useContext(GlobalContext);
     const [user, setUser] = useState(contact);
 
     useEffect(() => {
@@ -45,7 +45,7 @@ function ContactPreview({contact, image}) {
             type="contacts" 
             user={user} 
             image={image} 
-            room={rooms.find((room) => rooms.participantsArray.includes(contact.email))} 
+            room={unfilteredRooms.find((room) => room.participantsArray.includes(contact.email))} 
         />
     );
 }
