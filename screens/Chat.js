@@ -70,6 +70,9 @@ export default function Chat() {
             }
             const emailHash = `${currentUser.email}:${userB.email}`;
             setRoomHash(emailHash);
+            if(selectedImage && selectedImage.uri) {
+                await sendImage(selectedImage.uri, emailHash);
+            }
         })();
     }, []);
 
@@ -169,7 +172,7 @@ export default function Chat() {
                                         text: text.trim(),
                                         user, 
                                         _id: messageIdGenerator(),
-                                    });
+                                    }, true);
                                 }
                             }}
                         >
